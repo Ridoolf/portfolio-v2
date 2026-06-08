@@ -23,6 +23,7 @@ function getResolvedLength(variable) {
 export function Navbar() {
   const headerRef = useRef(null)
   const metricsRef = useRef({ initial: 0, docked: 0 })
+  const isDockedRef = useRef(false)
   const [isDocked, setIsDocked] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -42,7 +43,10 @@ export function Navbar() {
     const handleScroll = () => {
       if (mediaQuery.matches) {
         header.style.top = ''
-        setIsDocked(false)
+        if (isDockedRef.current) {
+          isDockedRef.current = false
+          setIsDocked(false)
+        }
         return
       }
 
@@ -51,7 +55,12 @@ export function Navbar() {
       const nextTop = Math.max(docked, initial - window.scrollY)
 
       header.style.top = `${nextTop}px`
-      setIsDocked(window.scrollY >= scrollOffset)
+
+      const nextDocked = window.scrollY >= scrollOffset
+      if (nextDocked !== isDockedRef.current) {
+        isDockedRef.current = nextDocked
+        setIsDocked(nextDocked)
+      }
     }
 
     const handleLayoutChange = () => {

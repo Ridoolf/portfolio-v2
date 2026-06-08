@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from 'react'
+import { useCallback, useEffect, useId, useState } from 'react'
 import { projects } from '../../data/projects'
 import { Timeline } from '../Timeline/Timeline'
 import { TimelineItem } from '../Timeline/TimelineItem'
@@ -6,7 +6,7 @@ import './Projects.css'
 
 const MOBILE_BREAKPOINT = 768
 
-function useIsMobile() {
+function useIsMobile(onBreakpointChange) {
   const [isMobile, setIsMobile] = useState(() =>
     typeof window !== 'undefined'
       ? window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches
@@ -15,11 +15,14 @@ function useIsMobile() {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`)
-    const handleChange = (event) => setIsMobile(event.matches)
+    const handleChange = (event) => {
+      setIsMobile(event.matches)
+      onBreakpointChange?.()
+    }
 
     mediaQuery.addEventListener('change', handleChange)
     return () => mediaQuery.removeEventListener('change', handleChange)
-  }, [])
+  }, [onBreakpointChange])
 
   return isMobile
 }
@@ -46,16 +49,37 @@ function ProjectImage({ image, initials, title }) {
   )
 }
 
+function ProjectVideo({ video, image, initials, title }) {
+  const [hasError, setHasError] = useState(false)
+
+  if (hasError) {
+    return (
+      <ProjectImage image={image} initials={initials} title={title} />
+    )
+  }
+
+  return (
+    <video
+      className="projects__video"
+      src={video}
+      poster={image}
+      controls
+      playsInline
+      preload="metadata"
+      aria-label={`Recorrido en video de ${title}`}
+      onError={() => setHasError(true)}
+    />
+  )
+}
+
 function ProjectMedia({ project }) {
   if (project.video) {
     return (
-      <video
-        className="projects__video"
-        src={project.video}
-        controls
-        playsInline
-        preload="metadata"
-        aria-label={`Recorrido en video de ${project.title}`}
+      <ProjectVideo
+        video={project.video}
+        image={project.image}
+        initials={project.initials}
+        title={project.title}
       />
     )
   }
@@ -145,12 +169,9 @@ function ProjectCard({ project, isMobile, isExpanded, onToggle }) {
 }
 
 export function Projects() {
-  const isMobile = useIsMobile()
   const [expandedId, setExpandedId] = useState(null)
-
-  useEffect(() => {
-    setExpandedId(null)
-  }, [isMobile])
+  const resetExpanded = useCallback(() => setExpandedId(null), [])
+  const isMobile = useIsMobile(resetExpanded)
 
   const handleToggle = (projectId) => {
     setExpandedId((current) => (current === projectId ? null : projectId))

@@ -10,7 +10,7 @@ export const experiences = [
     description:
       'Realizo proyectos variados para clientes de distintos sectores y grupos.',
     highlights: [
-      'Maquetación y diseño de paginas web.',
+      'Maquetación y diseño de páginas web.',
       'Sistemas a medida.',
     ],
   },
@@ -36,7 +36,7 @@ export const experiences = [
     role: 'Asesor jurídico',
     company: 'Estudio Picallo & Asociados',
     period: 'jul. 2022 - oct. 2022',
-    periodDateTime: '2022-07/2022-10',
+    periodDateTime: '2022-07',
     marker: '2022',
     markerSub: '3 meses',
     highlights: [

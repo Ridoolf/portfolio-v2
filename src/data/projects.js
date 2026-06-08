@@ -6,6 +6,7 @@ export const projects = [
     description:
       'Sistema de gestión para un consultorio odontológico. Panel interno con alta de pacientes, agenda de turnos, registro de tratamientos, control de caja y pagos, y carga de documentación clínica. Desarrollado como SaaS privado para uso profesional del cliente.',
     stack: ['React', 'Django', 'DRF', 'PostgreSQL', 'Axios', 'Vercel', 'Render'],
+    image: '/projects/fr-consultorio-img.png',
     video: '/projects/fr-consultorio.mp4',
     initials: 'FC',
   },
