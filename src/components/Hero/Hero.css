@@ -115,6 +115,24 @@
   box-shadow: 0 4px 16px rgba(80, 60, 140, 0.2);
 }
 
+.hero__btn--tertiary {
+  gap: 0.4rem;
+  background-color: transparent;
+  border-color: rgba(176, 156, 255, 0.2);
+  color: var(--color-text-muted);
+}
+
+.hero__btn--tertiary:hover {
+  border-color: rgba(176, 156, 255, 0.45);
+  color: var(--color-accent);
+  background-color: rgba(176, 156, 255, 0.06);
+  transform: translateY(-1px);
+}
+
+.hero__btn-icon {
+  flex-shrink: 0;
+}
+
 .hero__btn:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
@@ -183,9 +201,23 @@
 
   .hero__actions {
     justify-content: center;
+    width: 100%;
+    max-width: 20rem;
   }
 
   .hero__image-wrapper {
     order: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 16.5rem;
+  }
+
+  .hero__btn {
+    width: 100%;
   }
 }

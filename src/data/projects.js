@@ -60,7 +60,7 @@ export const projects = [
       'Portfolio personal con React y MUI. Secciones de proyectos, habilidades, certificaciones y formulario de contacto.',
     stack: ['React', 'MUI', 'JavaScript'],
     links: {
-      demo: 'https://portfolio-phi-eosin-59.vercel.app',
+      demo: 'https://portfolio-blond-six-7eclj568d2.vercel.app/',
       repo: 'https://github.com/Ridoolf/Portfolio',
     },
     image: '/projects/portfolio-v1.png',
