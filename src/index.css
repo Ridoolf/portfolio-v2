@@ -1,0 +1,117 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --color-bg: #110f18;
+  --color-text: #ebe8f4;
+  --color-text-muted: #918da8;
+  --color-accent: #b09cff;
+  --color-glass: rgba(200, 190, 255, 0.06);
+  --color-glass-border: rgba(200, 190, 255, 0.12);
+
+  --font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+
+  --nav-top-initial: clamp(5.5rem, 17vh, 10rem);
+  --nav-top-scrolled: 3rem;
+  --nav-bar-height: 3.25rem;
+  --section-padding: clamp(4rem, 8vw, 6rem);
+  --container-width: 1100px;
+  --container-padding: clamp(1.25rem, 4vw, 2rem);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 15% 0%, rgba(139, 108, 255, 0.14), transparent),
+    radial-gradient(ellipse 55% 45% at 85% 90%, rgba(167, 139, 250, 0.08), transparent);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+section {
+  scroll-margin-top: 5rem;
+}
+
+.section-shell {
+  width: 100%;
+  max-width: var(--container-width);
+  padding-block: var(--section-padding);
+  padding-inline: var(--container-padding);
+  border-top: 1px solid var(--color-glass-border);
+}
+
+.section-title {
+  font-size: clamp(1.5rem, 3vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin-bottom: 2.5rem;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 300;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #110f18;
+  background-color: var(--color-accent);
+  border-radius: 0.5rem;
+  transform: translateY(-200%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --nav-top-initial: 2rem;
+    --nav-top-scrolled: 0.75rem;
+    --nav-bar-height: 3.5rem;
+  }
+}

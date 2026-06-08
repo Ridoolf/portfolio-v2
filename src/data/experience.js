@@ -1,0 +1,51 @@
+export const experiences = [
+  {
+    id: 'autonomo-frontend',
+    role: 'Programador',
+    company: 'Freelance',
+    period: 'sept. 2025 - actualidad',
+    periodDateTime: '2025-09',
+    marker: '2025',
+    markerSub: 'En curso',
+    description:
+      'Realizo proyectos variados para clientes de distintos sectores y grupos.',
+    highlights: [
+      'Maquetación y diseño de sitios web.',
+      'Desarrollo de aplicaciones con React.',
+      'Sistemas a medida con Django y PostgreSQL.',
+    ],
+  },
+  {
+    id: 'carrefour-junior',
+    role: 'Junior',
+    company: 'Carrefour Argentina',
+    period: 'oct. 2022 - actualidad',
+    periodDateTime: '2022-10',
+    marker: '2022',
+    markerSub: '3+ años',
+    highlights: [
+      'Apertura, rendición y cierre de cajas.',
+      'Manejo de efectivo y medios electrónicos de pago.',
+      'Atención al cliente y resolución de reclamos e inconvenientes.',
+      'Gestión, control e ingreso de mercadería.',
+      'Control de stock del local.',
+      'Gestión del ingreso de proveedores y mayoristas.',
+    ],
+  },
+  {
+    id: 'picallo-asesor',
+    role: 'Asesor jurídico',
+    company: 'Estudio Picallo & Asociados',
+    period: 'jul. 2022 - oct. 2022',
+    periodDateTime: '2022-07/2022-10',
+    marker: '2022',
+    markerSub: '3 meses',
+    highlights: [
+      'Llamadas entrantes y salientes.',
+      'Gestión de base de datos.',
+      'Formalizar acuerdos de representación legal.',
+      'Coordinar citas y administración de agenda.',
+      'Cierre de venta y seguimiento.',
+    ],
+  },
+]

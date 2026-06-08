@@ -1,0 +1,119 @@
+.skills__container {
+  width: 100%;
+}
+
+.skills__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.5vw, 1rem);
+}
+
+.skills__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.875rem 0.5rem 0.75rem;
+  border-radius: 0.875rem;
+  border: 1px solid var(--color-glass-border);
+  background-color: rgba(200, 190, 255, 0.04);
+  transition:
+    background-color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+}
+
+.skills__logo {
+  width: 2.875rem;
+  height: 2.875rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.skills__slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 0.35rem;
+}
+
+.skills__line {
+  width: 100%;
+  border-top: 1px solid var(--color-glass-border);
+  transform: translateY(0);
+  transition: transform 0.2s ease-in-out;
+}
+
+.skills__name {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--color-text);
+  text-align: center;
+  line-height: 1.2;
+  transition: transform 0.2s ease-in-out;
+}
+
+.skills__item:hover {
+  background-color: var(--color-glass);
+  border-color: rgba(176, 156, 255, 0.28);
+  box-shadow: 0 6px 20px rgba(80, 60, 140, 0.14);
+}
+
+.skills__item:hover .skills__line {
+  transform: translateY(1.25em);
+}
+
+.skills__item:hover .skills__name {
+  transform: translateY(-8px);
+}
+
+@media (max-width: 900px) {
+  .skills__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .skills__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .skills__item {
+    padding: 0.75rem 0.4rem 0.65rem;
+  }
+
+  .skills__logo {
+    width: 2.625rem;
+    height: 2.625rem;
+  }
+
+  .skills__name {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .skills__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills__item,
+  .skills__line,
+  .skills__name {
+    transition: none;
+  }
+
+  .skills__item:hover .skills__line,
+  .skills__item:hover .skills__name {
+    transform: none;
+  }
+}
