@@ -10,6 +10,7 @@ const NAV_LINKS = [
 ]
 
 const MOBILE_BREAKPOINT = '(max-width: 900px)'
+const MENU_MOTION_MS = 300
 
 function getResolvedLength(variable) {
   const probe = document.createElement('div')
@@ -23,6 +24,7 @@ function getResolvedLength(variable) {
 export function Navbar() {
   const headerRef = useRef(null)
   const metricsRef = useRef({ initial: 0, docked: 0 })
+  const scrollUnlockTimerRef = useRef(null)
   const [isDocked, setIsDocked] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -91,6 +93,11 @@ export function Navbar() {
       if (event.key === 'Escape') setIsMenuOpen(false)
     }
 
+    if (scrollUnlockTimerRef.current !== null) {
+      window.clearTimeout(scrollUnlockTimerRef.current)
+      scrollUnlockTimerRef.current = null
+    }
+
     const scrollY = window.scrollY
     document.body.style.position = 'fixed'
     document.body.style.top = `-${scrollY}px`
@@ -101,18 +108,23 @@ export function Navbar() {
     window.addEventListener('keydown', handleKeyDown)
     return () => {
       const lockedScrollY = Number(document.body.dataset.scrollLock || '0')
-      const html = document.documentElement
-      const previousScrollBehavior = html.style.scrollBehavior
 
-      document.body.style.position = ''
-      document.body.style.top = ''
-      document.body.style.left = ''
-      document.body.style.right = ''
-      delete document.body.dataset.scrollLock
+      scrollUnlockTimerRef.current = window.setTimeout(() => {
+        const html = document.documentElement
+        const previousScrollBehavior = html.style.scrollBehavior
 
-      html.style.scrollBehavior = 'auto'
-      window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'instant' })
-      html.style.scrollBehavior = previousScrollBehavior
+        document.body.style.position = ''
+        document.body.style.top = ''
+        document.body.style.left = ''
+        document.body.style.right = ''
+        delete document.body.dataset.scrollLock
+
+        html.style.scrollBehavior = 'auto'
+        window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'instant' })
+        html.style.scrollBehavior = previousScrollBehavior
+
+        scrollUnlockTimerRef.current = null
+      }, MENU_MOTION_MS)
 
       window.removeEventListener('keydown', handleKeyDown)
     }
