@@ -91,10 +91,29 @@ export function Navbar() {
       if (event.key === 'Escape') setIsMenuOpen(false)
     }
 
-    document.body.style.overflow = 'hidden'
+    const scrollY = window.scrollY
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.left = '0'
+    document.body.style.right = '0'
+    document.body.dataset.scrollLock = String(scrollY)
+
     window.addEventListener('keydown', handleKeyDown)
     return () => {
-      document.body.style.overflow = ''
+      const lockedScrollY = Number(document.body.dataset.scrollLock || '0')
+      const html = document.documentElement
+      const previousScrollBehavior = html.style.scrollBehavior
+
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.left = ''
+      document.body.style.right = ''
+      delete document.body.dataset.scrollLock
+
+      html.style.scrollBehavior = 'auto'
+      window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'instant' })
+      html.style.scrollBehavior = previousScrollBehavior
+
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [isMenuOpen])
@@ -120,38 +139,46 @@ export function Navbar() {
           className="navbar__bubble glass-surface"
           aria-label="Navegación principal"
         >
-          <div className="navbar__bar">
-            <a className="navbar__brand" href="#inicio" onClick={closeMenu}>
-              portfolio
-            </a>
+          <a className="navbar__brand" href="#inicio" onClick={closeMenu}>
+            portfolio
+          </a>
 
-            <button
-              type="button"
-              className="navbar__toggle"
-              aria-expanded={isMenuOpen}
-              aria-controls="navbar-menu"
-              aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
-              onClick={() => setIsMenuOpen((prev) => !prev)}
-            >
-              <span className="navbar__toggle-icon" aria-hidden="true" />
-            </button>
-          </div>
-
-          <div
-            className="navbar__panel glass-surface--strong"
-            aria-hidden={!isMenuOpen}
+          <button
+            type="button"
+            className="navbar__toggle"
+            aria-expanded={isMenuOpen}
+            aria-controls="navbar-menu"
+            aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+            onClick={() => setIsMenuOpen((prev) => !prev)}
           >
-            <ul id="navbar-menu" className="navbar__list">
-              {NAV_LINKS.map(({ label, href }) => (
-                <li key={href}>
-                  <a className="navbar__link" href={href} onClick={closeMenu}>
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <span className="navbar__toggle-icon" aria-hidden="true" />
+          </button>
+
+          <ul id="navbar-menu" className="navbar__list navbar__list--desktop">
+            {NAV_LINKS.map(({ label, href }) => (
+              <li key={href}>
+                <a className="navbar__link" href={href} onClick={closeMenu}>
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </nav>
+
+        <div
+          className={`navbar__panel glass-surface--strong${isMenuOpen ? ' navbar__panel--open' : ''}`}
+          aria-hidden={!isMenuOpen}
+        >
+          <ul className="navbar__list navbar__list--mobile">
+            {NAV_LINKS.map(({ label, href }) => (
+              <li key={href}>
+                <a className="navbar__link" href={href} onClick={closeMenu}>
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </header>
   )
