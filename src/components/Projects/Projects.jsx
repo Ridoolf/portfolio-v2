@@ -128,7 +128,7 @@ function ProjectCard({ project, isMobile }) {
               )}
               {project.links.repo && (
                 <a
-                  className="projects__link projects__link--secondary"
+                  className="projects__link projects__link--secondary glass-surface--soft"
                   href={project.links.repo}
                   target="_blank"
                   rel="noopener noreferrer"

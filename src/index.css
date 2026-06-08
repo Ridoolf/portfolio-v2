@@ -71,6 +71,42 @@ section {
   scroll-margin-top: 5rem;
 }
 
+/* Glass surfaces — fallback sólido si backdrop-filter no compone en prod */
+.glass-surface {
+  background-color: rgba(22, 19, 32, 0.84);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  backdrop-filter: blur(16px) saturate(1.1);
+  transform: translateZ(0);
+}
+
+.glass-surface--soft {
+  background-color: rgba(22, 19, 32, 0.78);
+  -webkit-backdrop-filter: blur(12px) saturate(1.05);
+  backdrop-filter: blur(12px) saturate(1.05);
+  transform: translateZ(0);
+}
+
+.glass-surface--strong {
+  background-color: rgba(17, 15, 24, 0.9);
+  -webkit-backdrop-filter: blur(20px) saturate(1.15);
+  backdrop-filter: blur(20px) saturate(1.15);
+  transform: translateZ(0);
+}
+
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .glass-surface {
+    background-color: rgba(200, 190, 255, 0.06);
+  }
+
+  .glass-surface--soft {
+    background-color: rgba(200, 190, 255, 0.06);
+  }
+
+  .glass-surface--strong {
+    background-color: rgba(17, 15, 24, 0.72);
+  }
+}
+
 .section-shell {
   width: 100%;
   max-width: var(--container-width);

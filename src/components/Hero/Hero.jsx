@@ -19,7 +19,10 @@ export function Hero() {
             <a className="hero__btn hero__btn--primary" href="#proyectos">
               Ver proyectos
             </a>
-            <a className="hero__btn hero__btn--secondary" href="#contacto">
+            <a
+              className="hero__btn hero__btn--secondary glass-surface--soft"
+              href="#contacto"
+            >
               Contáctame
             </a>
           </div>

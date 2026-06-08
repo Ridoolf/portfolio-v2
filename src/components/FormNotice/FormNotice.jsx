@@ -9,7 +9,7 @@ export function FormNotice({ type, message, onClose }) {
 
   return (
     <div
-      className={`form-notice form-notice--${type}`}
+      className={`form-notice glass-surface--strong form-notice--${type}`}
       role={type === 'error' ? 'alert' : 'status'}
       aria-live="polite"
     >

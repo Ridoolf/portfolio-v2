@@ -116,7 +116,10 @@ export function Navbar() {
       />
 
       <div className="navbar__shell">
-        <nav className="navbar__bubble" aria-label="Navegación principal">
+        <nav
+          className="navbar__bubble glass-surface"
+          aria-label="Navegación principal"
+        >
           <div className="navbar__bar">
             <a className="navbar__brand" href="#inicio" onClick={closeMenu}>
               portfolio
@@ -134,7 +137,10 @@ export function Navbar() {
             </button>
           </div>
 
-          <div className="navbar__panel" aria-hidden={!isMenuOpen}>
+          <div
+            className="navbar__panel glass-surface--strong"
+            aria-hidden={!isMenuOpen}
+          >
             <ul id="navbar-menu" className="navbar__list">
               {NAV_LINKS.map(({ label, href }) => (
                 <li key={href}>

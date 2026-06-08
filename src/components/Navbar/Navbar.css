@@ -30,9 +30,10 @@
 }
 
 .navbar__backdrop--visible {
-  background-color: rgba(17, 15, 24, 0.5);
+  background-color: rgba(17, 15, 24, 0.62);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  transform: translateZ(0);
   pointer-events: auto;
   visibility: visible;
   transition:
@@ -52,10 +53,8 @@
   align-items: center;
   gap: clamp(1.25rem, 3vw, 2.75rem);
   padding: 0.625rem 1.25rem;
-  background: var(--color-glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--color-glass-border);
+  isolation: isolate;
   border-radius: 999px;
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.2),
@@ -256,20 +255,10 @@
       0 8px 32px rgba(80, 60, 140, 0.2);
     visibility: hidden;
     pointer-events: none;
+    isolation: isolate;
     transition:
       grid-template-rows var(--nav-motion),
       visibility 0s linear var(--nav-motion);
-  }
-
-  .navbar__panel::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: rgba(17, 15, 24, 0.82);
-    backdrop-filter: blur(20px) saturate(1.15);
-    -webkit-backdrop-filter: blur(20px) saturate(1.15);
-    z-index: 0;
   }
 
   .navbar--open .navbar__panel {

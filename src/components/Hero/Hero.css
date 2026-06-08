@@ -105,17 +105,14 @@
 }
 
 .hero__btn--secondary {
-  background-color: var(--color-glass);
   border-color: var(--color-glass-border);
   color: var(--color-text);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
 .hero__btn--secondary:hover {
   border-color: rgba(176, 156, 255, 0.35);
   color: var(--color-accent);
-  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(80, 60, 140, 0.2);
 }
 
 .hero__btn:focus-visible {
