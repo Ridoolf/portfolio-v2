@@ -10,9 +10,8 @@ export const experiences = [
     description:
       'Realizo proyectos variados para clientes de distintos sectores y grupos.',
     highlights: [
-      'Maquetación y diseño de sitios web.',
-      'Desarrollo de aplicaciones con React.',
-      'Sistemas a medida con Django y PostgreSQL.',
+      'Maquetación y diseño de paginas web.',
+      'Sistemas a medida.',
     ],
   },
   {

@@ -69,10 +69,9 @@ function ProjectMedia({ project }) {
   )
 }
 
-function ProjectCard({ project, isMobile }) {
-  const [expandedOnMobile, setExpandedOnMobile] = useState(false)
+function ProjectCard({ project, isMobile, isExpanded, onToggle }) {
   const panelId = useId()
-  const isOpen = !isMobile || expandedOnMobile
+  const isOpen = !isMobile || isExpanded
   const isCollapsed = isMobile && !isOpen
 
   const toggleLabel = isOpen
@@ -87,7 +86,7 @@ function ProjectCard({ project, isMobile }) {
         aria-expanded={isOpen}
         aria-controls={panelId}
         aria-label={isMobile ? toggleLabel : undefined}
-        onClick={() => isMobile && setExpandedOnMobile((open) => !open)}
+        onClick={() => isMobile && onToggle(project.id)}
       >
         <div className="projects__header">
           <h3 className="projects__title">{project.title}</h3>
@@ -147,6 +146,15 @@ function ProjectCard({ project, isMobile }) {
 
 export function Projects() {
   const isMobile = useIsMobile()
+  const [expandedId, setExpandedId] = useState(null)
+
+  useEffect(() => {
+    setExpandedId(null)
+  }, [isMobile])
+
+  const handleToggle = (projectId) => {
+    setExpandedId((current) => (current === projectId ? null : projectId))
+  }
 
   return (
     <section id="proyectos" className="projects section-shell">
@@ -161,9 +169,10 @@ export function Projects() {
               media={<ProjectMedia project={project} />}
             >
               <ProjectCard
-                key={`${project.id}-${isMobile}`}
                 project={project}
                 isMobile={isMobile}
+                isExpanded={expandedId === project.id}
+                onToggle={handleToggle}
               />
             </TimelineItem>
           ))}

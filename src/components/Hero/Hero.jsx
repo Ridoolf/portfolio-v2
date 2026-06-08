@@ -11,8 +11,8 @@ export function Hero() {
             <p className="hero__role">Full Stack Developer</p>
           </div>
           <p className="hero__description">
-            Especializado en <span className="hero__description-highlight">ReactJS</span>, desarrollo sitios y aplicaciones web enfocadas en la experiencia del usuario. <br />
-            Actualmente estudio Python en BA Tech y sigo formándome mientras trabajo en proyectos freelance.
+            Especializado en <span className="hero__description-highlight">ReactJS</span>, desarrollo paginas web enfocadas en la experiencia del usuario. <br />
+            Actualmente estudio Python en "BA Tech" y sigo formándome mientras trabajo en proyectos freelance.
           </p>
 
           <div className="hero__actions">

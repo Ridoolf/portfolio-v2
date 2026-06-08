@@ -24,6 +24,11 @@
 
 html {
   scroll-behavior: smooth;
+  min-height: 100%;
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 15% 0%, rgba(139, 108, 255, 0.14), transparent),
+    radial-gradient(ellipse 55% 45% at 85% 90%, rgba(167, 139, 250, 0.08), transparent);
 }
 
 main {
@@ -35,14 +40,12 @@ main {
 
 body {
   margin: 0;
+  min-height: 100%;
   font-family: var(--font-family);
   font-size: 1rem;
   line-height: 1.6;
   color: var(--color-text);
-  background-color: var(--color-bg);
-  background-image:
-    radial-gradient(ellipse 80% 60% at 15% 0%, rgba(139, 108, 255, 0.14), transparent),
-    radial-gradient(ellipse 55% 45% at 85% 90%, rgba(167, 139, 250, 0.08), transparent);
+  background: transparent;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
