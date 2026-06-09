@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import './Hero.css'
 
 const CV_PATH = '/cv/lucas-ridolfi-cv.pdf'
 const CV_FILENAME = 'Lucas-Ridolfi-CV.pdf'
+const PROFILE_IMAGE = '/perfil.png'
 
 function DownloadIcon() {
   return (
@@ -27,6 +29,29 @@ function DownloadIcon() {
         strokeLinecap="round"
       />
     </svg>
+  )
+}
+
+function HeroProfileImage() {
+  const [hasError, setHasError] = useState(false)
+
+  if (hasError) {
+    return (
+      <div className="hero__image-placeholder" aria-hidden="true">
+        <span className="hero__image-initials">LR</span>
+      </div>
+    )
+  }
+
+  return (
+    <img
+      className="hero__image"
+      src={PROFILE_IMAGE}
+      alt="Lucas Ridolfi, Full Stack Developer"
+      width={280}
+      height={280}
+      onError={() => setHasError(true)}
+    />
   )
 }
 
@@ -68,9 +93,7 @@ export function Hero() {
         </div>
 
         <div className="hero__image-wrapper">
-          <div className="hero__image-placeholder" aria-hidden="true">
-            <span className="hero__image-initials">LR</span>
-          </div>
+          <HeroProfileImage />
         </div>
       </div>
     </section>
