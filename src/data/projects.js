@@ -1,6 +1,7 @@
 export const projects = [
   {
     id: 'fr-consultorio',
+    featured: true,
     title: 'FR Consultorio',
     year: '2026',
     description:
@@ -12,6 +13,7 @@ export const projects = [
   },
   {
     id: 'med-mistica',
+    featured: true,
     title: 'MED Mística',
     year: '2026',
     description:
@@ -26,6 +28,7 @@ export const projects = [
   },
   {
     id: 'aberturasluxor',
+    featured: true,
     title: 'Aberturas Luxor',
     year: '2025',
     description:
@@ -39,7 +42,22 @@ export const projects = [
     initials: 'AL',
   },
   {
+    id: 'tu-espacio-online',
+    featured: false,
+    title: 'Tu Espacio Online',
+    year: '2026',
+    description:
+      'Marca y sitio comercial para webs y sistemas chicos. Landing con cotizador, contacto por WhatsApp y diseño responsive.',
+    stack: ['React', 'Vite', 'React Router', 'CSS'],
+    links: {
+      demo: 'https://tuespacio-online.vercel.app',
+    },
+    image: '/projects/tu-espacio-online.png',
+    initials: 'TE',
+  },
+  {
     id: 'live-chat',
+    featured: false,
     title: 'Live Chat',
     year: '2025',
     description:
@@ -54,6 +72,7 @@ export const projects = [
   },
   {
     id: 'portfolio-v1',
+    featured: false,
     title: 'Portfolio v1',
     year: '2025',
     description:
@@ -67,3 +86,6 @@ export const projects = [
     initials: 'P1',
   },
 ]
+
+export const featuredProjects = projects.filter((project) => project.featured)
+export const otherProjects = projects.filter((project) => !project.featured)

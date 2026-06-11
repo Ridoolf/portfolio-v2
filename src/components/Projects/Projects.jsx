@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useId, useState } from 'react'
-import { projects } from '../../data/projects'
+import { featuredProjects, otherProjects } from '../../data/projects'
 import { Timeline } from '../Timeline/Timeline'
 import { TimelineItem } from '../Timeline/TimelineItem'
 import './Projects.css'
@@ -168,13 +168,45 @@ function ProjectCard({ project, isMobile, isExpanded, onToggle }) {
   )
 }
 
+function ProjectTimeline({
+  projectList,
+  startIndex,
+  isMobile,
+  expandedId,
+  onToggle,
+}) {
+  return projectList.map((project, index) => (
+    <TimelineItem
+      key={project.id}
+      index={startIndex + index}
+      media={<ProjectMedia project={project} />}
+    >
+      <ProjectCard
+        project={project}
+        isMobile={isMobile}
+        isExpanded={expandedId === project.id}
+        onToggle={onToggle}
+      />
+    </TimelineItem>
+  ))
+}
+
 export function Projects() {
   const [expandedId, setExpandedId] = useState(null)
+  const [showAll, setShowAll] = useState(false)
   const resetExpanded = useCallback(() => setExpandedId(null), [])
   const isMobile = useIsMobile(resetExpanded)
+  const hasMore = otherProjects.length > 0
 
   const handleToggle = (projectId) => {
     setExpandedId((current) => (current === projectId ? null : projectId))
+  }
+
+  const handleShowAllToggle = () => {
+    setShowAll((current) => {
+      if (current) setExpandedId(null)
+      return !current
+    })
   }
 
   return (
@@ -183,21 +215,48 @@ export function Projects() {
         <h2 className="section-title">Proyectos</h2>
 
         <Timeline>
-          {projects.map((project, index) => (
-            <TimelineItem
-              key={project.id}
-              index={index}
-              media={<ProjectMedia project={project} />}
-            >
-              <ProjectCard
-                project={project}
-                isMobile={isMobile}
-                isExpanded={expandedId === project.id}
-                onToggle={handleToggle}
-              />
-            </TimelineItem>
-          ))}
+          <ProjectTimeline
+            projectList={featuredProjects}
+            startIndex={0}
+            isMobile={isMobile}
+            expandedId={expandedId}
+            onToggle={handleToggle}
+          />
         </Timeline>
+
+        {hasMore && (
+          <>
+            <button
+              type="button"
+              className="projects__show-all glass-surface--soft"
+              aria-expanded={showAll}
+              aria-controls="projects-more"
+              onClick={handleShowAllToggle}
+            >
+              {showAll
+                ? 'Ver menos'
+                : `Ver todos los proyectos (${otherProjects.length})`}
+            </button>
+
+            <div
+              id="projects-more"
+              className={`projects__more${showAll ? ' projects__more--open' : ''}`}
+              hidden={!showAll}
+            >
+              <div className="projects__more-inner">
+                <Timeline>
+                  <ProjectTimeline
+                    projectList={otherProjects}
+                    startIndex={featuredProjects.length}
+                    isMobile={isMobile}
+                    expandedId={expandedId}
+                    onToggle={handleToggle}
+                  />
+                </Timeline>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </section>
   )

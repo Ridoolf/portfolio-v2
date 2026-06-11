@@ -16,9 +16,37 @@
   gap: 1rem;
 }
 
+.footer__start {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
 .footer__copy {
   font-size: 0.8125rem;
   color: var(--color-text-muted);
+}
+
+.footer__service {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.footer__service-link {
+  font-weight: 500;
+  color: var(--color-text-muted);
+  transition: color 0.2s ease;
+}
+
+.footer__service-link:hover {
+  color: var(--color-accent);
+}
+
+.footer__service-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 0.25rem;
 }
 
 .footer__list {

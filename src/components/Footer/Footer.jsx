@@ -1,4 +1,5 @@
 import './Footer.css'
+import { siteLinks } from '../../config/siteLinks'
 
 const SOCIAL_LINKS = [
   {
@@ -17,9 +18,23 @@ export function Footer() {
   return (
     <footer className="footer">
       <div className="footer__container">
-        <p className="footer__copy">
-          © {year} Lucas Ridolfi. Todos los derechos reservados.
-        </p>
+        <div className="footer__start">
+          <p className="footer__copy">
+            © {year} Lucas Ridolfi. Todos los derechos reservados.
+          </p>
+
+          <p className="footer__service">
+            Creador de{' '}
+            <a
+              className="footer__service-link"
+              href={siteLinks.tuEspacioOnline.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {siteLinks.tuEspacioOnline.name}
+            </a>
+          </p>
+        </div>
 
         <nav aria-label="Redes sociales">
           <ul className="footer__list">
