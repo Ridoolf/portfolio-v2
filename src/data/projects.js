@@ -47,7 +47,7 @@ export const projects = [
     title: 'Tu Espacio Online',
     year: '2026',
     description:
-      'Marca y sitio comercial para webs y sistemas chicos. Landing con cotizador, contacto por WhatsApp y diseño responsive.',
+      'Sitio comercial para un servicio de páginas web orientado a emprendimientos y negocios locales. Landing con paquetes y precios visibles, comparativa de planes, proceso de trabajo y contacto por WhatsApp.',
     stack: ['React', 'Vite', 'React Router', 'CSS'],
     links: {
       demo: 'https://tuespacio-online.vercel.app',
