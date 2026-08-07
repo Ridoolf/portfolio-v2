@@ -86,20 +86,6 @@ export const projects = [
     initials: 'AL',
   },
   {
-    id: 'tu-espacio-online',
-    featured: false,
-    title: 'Tu Espacio Online',
-    year: '2026',
-    description:
-      'Sitio comercial para un servicio de páginas web orientado a emprendimientos y negocios locales. Landing con paquetes y precios visibles, comparativa de planes, proceso de trabajo y contacto por WhatsApp.',
-    stack: ['React', 'Vite', 'React Router', 'CSS'],
-    links: {
-      demo: 'https://tuespacio-online.vercel.app',
-    },
-    image: '/projects/tu-espacio-online.png',
-    initials: 'TE',
-  },
-  {
     id: 'live-chat',
     featured: false,
     title: 'Live Chat',

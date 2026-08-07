@@ -5,8 +5,6 @@ export const experiences = [
     company: 'Freelance',
     period: 'sept. 2025 - actualidad',
     periodDateTime: '2025-09',
-    marker: '2025',
-    markerSub: 'En curso',
     description:
       'Realizo proyectos variados para clientes de distintos sectores y grupos.',
     highlights: [
@@ -20,8 +18,6 @@ export const experiences = [
     company: 'Carrefour Argentina',
     period: 'oct. 2022 - actualidad',
     periodDateTime: '2022-10',
-    marker: '2022',
-    markerSub: '3+ años',
     highlights: [
       'Apertura, rendición y cierre de cajas.',
       'Manejo de efectivo y medios electrónicos de pago.',
@@ -37,8 +33,6 @@ export const experiences = [
     company: 'Estudio Picallo & Asociados',
     period: 'jul. 2022 - oct. 2022',
     periodDateTime: '2022-07',
-    marker: '2022',
-    markerSub: '3 meses',
     highlights: [
       'Llamadas entrantes y salientes.',
       'Gestión de base de datos.',

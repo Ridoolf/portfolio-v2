@@ -10,15 +10,9 @@ function ExperienceCard({ entry }) {
         <h3 className="experience__role">{entry.role}</h3>
         <p className="experience__company">{entry.company}</p>
 
-        <div className="experience__meta-row">
-          <time className="experience__period" dateTime={entry.periodDateTime}>
-            {entry.period}
-          </time>
-          <div className="experience__meta">
-            <span className="experience__year">{entry.marker}</span>
-            <span className="experience__duration">{entry.markerSub}</span>
-          </div>
-        </div>
+        <time className="experience__period" dateTime={entry.periodDateTime}>
+          {entry.period}
+        </time>
       </header>
 
       {(entry.description || hasHighlights) && (

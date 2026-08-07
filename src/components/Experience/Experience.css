@@ -42,49 +42,12 @@
   line-height: 1.4;
 }
 
-.experience__meta-row {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
-  margin-top: 0.25rem;
-}
-
 .experience__period {
+  margin-top: 0.25rem;
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--color-accent);
   line-height: 1.3;
-}
-
-.experience__meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.experience__year {
-  font-size: 0.6875rem;
-  font-weight: 600;
-  color: var(--color-accent);
-  padding: 0.2rem 0.5rem;
-  border-radius: 999px;
-  background-color: var(--color-glass);
-  border: 1px solid var(--color-glass-border);
-  line-height: 1.2;
-}
-
-.experience__duration {
-  font-size: 0.6875rem;
-  font-weight: 500;
-  color: var(--color-text-muted);
-  padding: 0.2rem 0.5rem;
-  border-radius: 999px;
-  background-color: rgba(200, 190, 255, 0.03);
-  border: 1px solid var(--color-glass-border);
-  line-height: 1.2;
-  white-space: nowrap;
 }
 
 .experience__body {
@@ -131,13 +94,6 @@
     padding: 1rem;
   }
 
-  .experience__meta-row {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-
   .experience__role {
     font-size: 1.125rem;
   }
@@ -148,11 +104,6 @@
 
   .experience__period {
     font-size: 0.8125rem;
-  }
-
-  .experience__year,
-  .experience__duration {
-    font-size: 0.75rem;
   }
 
   .experience__description,
