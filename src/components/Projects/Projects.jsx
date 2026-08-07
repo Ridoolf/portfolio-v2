@@ -97,6 +97,8 @@ function ProjectCard({ project, isMobile, isExpanded, onToggle }) {
   const panelId = useId()
   const isOpen = !isMobile || isExpanded
   const isCollapsed = isMobile && !isOpen
+  const clientGroup = project.clientGroup
+  const hasLinks = project.links?.demo || project.links?.repo
 
   const toggleLabel = isOpen
     ? `Contraer ${project.title}`
@@ -114,7 +116,12 @@ function ProjectCard({ project, isMobile, isExpanded, onToggle }) {
       >
         <div className="projects__header">
           <h3 className="projects__title">{project.title}</h3>
-          <span className="projects__year">{project.year}</span>
+          <div className="projects__meta">
+            {project.kind && (
+              <span className="projects__kind">{project.kind}</span>
+            )}
+            <span className="projects__year">{project.year}</span>
+          </div>
         </div>
         <span className="projects__chevron" aria-hidden="true" />
       </button>
@@ -126,6 +133,25 @@ function ProjectCard({ project, isMobile, isExpanded, onToggle }) {
         {...(isCollapsed ? { inert: true } : {})}
       >
         <div className="projects__panel-inner">
+          {clientGroup && (
+            <p className="projects__client">
+              <span className="projects__client-label">{clientGroup.client}</span>
+              {clientGroup.relatedProjectId && (
+                <>
+                  <span className="projects__client-sep" aria-hidden="true">
+                    ·
+                  </span>
+                  <a
+                    className="projects__client-link"
+                    href={`#proyecto-${clientGroup.relatedProjectId}`}
+                  >
+                    Ver {clientGroup.relatedLabel}
+                  </a>
+                </>
+              )}
+            </p>
+          )}
+
           <p className="projects__description">{project.description}</p>
 
           <ul className="projects__stack" aria-label="Tecnologías utilizadas">
@@ -136,7 +162,11 @@ function ProjectCard({ project, isMobile, isExpanded, onToggle }) {
             ))}
           </ul>
 
-          {(project.links?.demo || project.links?.repo) && (
+          {project.privateProject && (
+            <p className="projects__private-note">Sistema privado del cliente</p>
+          )}
+
+          {hasLinks && (
             <div className="projects__links">
               {project.links.demo && (
                 <a
@@ -175,20 +205,29 @@ function ProjectTimeline({
   expandedId,
   onToggle,
 }) {
-  return projectList.map((project, index) => (
-    <TimelineItem
-      key={project.id}
-      index={startIndex + index}
-      media={<ProjectMedia project={project} />}
-    >
-      <ProjectCard
-        project={project}
-        isMobile={isMobile}
-        isExpanded={expandedId === project.id}
-        onToggle={onToggle}
-      />
-    </TimelineItem>
-  ))
+  return projectList.map((project, index) => {
+    const previousProject = projectList[index - 1]
+    const isPaired =
+      Boolean(project.clientGroup?.client) &&
+      previousProject?.clientGroup?.client === project.clientGroup.client
+
+    return (
+      <TimelineItem
+        key={project.id}
+        id={`proyecto-${project.id}`}
+        index={startIndex + index}
+        paired={isPaired}
+        media={<ProjectMedia project={project} />}
+      >
+        <ProjectCard
+          project={project}
+          isMobile={isMobile}
+          isExpanded={expandedId === project.id}
+          onToggle={onToggle}
+        />
+      </TimelineItem>
+    )
+  })
 }
 
 export function Projects() {

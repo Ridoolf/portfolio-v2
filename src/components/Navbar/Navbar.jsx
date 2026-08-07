@@ -130,20 +130,41 @@ export function Navbar() {
           className="navbar__bubble glass-surface"
           aria-label="Navegación principal"
         >
-          <a className="navbar__brand" href="#inicio" onClick={closeMenu}>
-            portfolio
-          </a>
+          <div className="navbar__bar">
+            <a className="navbar__brand" href="#inicio" onClick={closeMenu}>
+              portfolio
+            </a>
 
-          <button
-            type="button"
-            className="navbar__toggle"
-            aria-expanded={isMenuOpen}
-            aria-controls="navbar-menu"
-            aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
-            onClick={() => setIsMenuOpen((prev) => !prev)}
+            <button
+              type="button"
+              className="navbar__toggle"
+              aria-expanded={isMenuOpen}
+              aria-controls="navbar-menu-mobile"
+              aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+              onClick={() => setIsMenuOpen((prev) => !prev)}
+            >
+              <span className="navbar__toggle-icon" aria-hidden="true" />
+            </button>
+          </div>
+
+          <div
+            id="navbar-menu-mobile"
+            className="navbar__menu-collapse"
+            aria-hidden={!isMenuOpen}
+            {...(!isMenuOpen ? { inert: true } : {})}
           >
-            <span className="navbar__toggle-icon" aria-hidden="true" />
-          </button>
+            <div className="navbar__menu-inner">
+              <ul className="navbar__list navbar__list--mobile">
+                {NAV_LINKS.map(({ label, href }) => (
+                  <li key={href}>
+                    <a className="navbar__link" href={href} onClick={closeMenu}>
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
 
           <ul id="navbar-menu" className="navbar__list navbar__list--desktop">
             {NAV_LINKS.map(({ label, href }) => (
@@ -155,21 +176,6 @@ export function Navbar() {
             ))}
           </ul>
         </nav>
-
-        <div
-          className={`navbar__panel glass-surface--strong${isMenuOpen ? ' navbar__panel--open' : ''}`}
-          aria-hidden={!isMenuOpen}
-        >
-          <ul className="navbar__list navbar__list--mobile">
-            {NAV_LINKS.map(({ label, href }) => (
-              <li key={href}>
-                <a className="navbar__link" href={href} onClick={closeMenu}>
-                  {label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </header>
   )

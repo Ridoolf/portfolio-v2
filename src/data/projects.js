@@ -1,19 +1,63 @@
 export const projects = [
   {
+    id: 'ron',
+    featured: true,
+    title: 'Soluciones Integrales RON',
+    year: '2026',
+    description:
+      'Web multipágina para mantenimiento, refacciones, obra y domótica. Incluye secciones de servicios, nosotros y contacto por WhatsApp.',
+    stack: ['HTML', 'CSS', 'JavaScript'],
+    image: '/projects/ron.png',
+    initials: 'RO',
+  },
+  {
+    id: 'fannyruth',
+    featured: true,
+    title: 'Fanny Ruth',
+    year: '2026',
+    kind: 'Sitio web',
+    description:
+      'Sitio web multipágina para el consultorio odontológico de la Dra. Fanny Ruth. Presenta tratamientos, historia profesional y contacto por WhatsApp.',
+    stack: ['React', 'Vite', 'React Router', 'GSAP'],
+    links: {
+      demo: 'https://fannyruth.vercel.app/',
+      repo: 'https://github.com/Ridoolf/fannyruth',
+    },
+    image: '/projects/fannyruth.png',
+    initials: 'FR',
+  },
+  {
     id: 'fr-consultorio',
     featured: true,
     title: 'FR Consultorio',
     year: '2026',
+    kind: 'Panel de gestión',
     description:
       'Sistema de gestión para un consultorio odontológico. Panel interno con alta de pacientes, agenda de turnos, registro de tratamientos, control de caja y pagos, y carga de documentación clínica. Desarrollado como SaaS privado para uso profesional del cliente.',
     stack: ['React', 'Django', 'DRF', 'PostgreSQL', 'Axios', 'Vercel', 'Render'],
     image: '/projects/fr-consultorio-img.png',
     video: '/projects/fr-consultorio.mp4',
     initials: 'FC',
+    privateProject: true,
+  },
+  {
+    id: 'fumigaciones-paz',
+    featured: true,
+    title: 'Control Total Fumigaciones Paz',
+    year: '2026',
+    description:
+      'Sitio corporativo para empresa de fumigaciones. Presenta servicios por rubro, reseñas y contacto directo por WhatsApp.',
+    stack: ['HTML', 'CSS', 'JavaScript'],
+    links: {
+      demo: 'https://www.controltotalfumigacionespaz.com.ar/',
+      repo: 'https://github.com/Ridoolf/controltotal',
+    },
+    image: '/projects/fumigaciones-paz.png',
+    initials: 'FP',
   },
   {
     id: 'med-mistica',
-    featured: true,
+    featured: false,
     title: 'MED Mística',
     year: '2026',
     description:
@@ -28,7 +72,7 @@ export const projects = [
   },
   {
     id: 'aberturasluxor',
-    featured: true,
+    featured: false,
     title: 'Aberturas Luxor',
     year: '2025',
     description:

@@ -65,8 +65,17 @@
     0 4px 20px rgba(80, 60, 140, 0.25);
 }
 
-.navbar__panel {
+.navbar__bar {
+  display: contents;
+}
+
+.navbar__menu-collapse {
   display: none;
+}
+
+.navbar__menu-inner {
+  min-height: 0;
+  overflow: hidden;
 }
 
 .navbar__list--mobile {
@@ -211,14 +220,36 @@
   .navbar__bubble {
     position: relative;
     z-index: 2;
+    flex-direction: column;
+    align-items: stretch;
     gap: 0;
-    justify-content: space-between;
     width: 100%;
     padding: 0.5rem 0.875rem;
+    border-radius: 999px;
+    overflow: hidden;
+    transition: border-radius 0s linear 0.28s;
+  }
+
+  .navbar__bubble.glass-surface {
+    transform: none;
+    isolation: isolate;
+  }
+
+  .navbar--open .navbar__bubble {
+    border-radius: 1.8rem;
+    transition: border-radius 0s linear 0s;
   }
 
   .navbar--docked .navbar__bubble {
     padding: 0.5rem 0.875rem;
+  }
+
+  .navbar__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
   }
 
   .navbar__brand {
@@ -233,41 +264,43 @@
     display: none;
   }
 
+  .navbar__menu-collapse {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      max-height 0.28s ease-out,
+      visibility 0s linear 0s;
+  }
+
+  .navbar--open .navbar__menu-collapse {
+    max-height: 18rem;
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+      max-height 0.28s ease-out,
+      visibility 0s linear 0s;
+  }
+
+  .navbar__menu-inner {
+    padding-bottom: 0.25rem;
+    opacity: 0;
+    transition: opacity 0.12s ease-out;
+  }
+
+  .navbar--open .navbar__menu-inner {
+    opacity: 1;
+    transition: opacity 0.12s ease-out 0.04s;
+  }
+
   .navbar__list--mobile {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 0.125rem;
-    padding: 0.375rem;
-  }
-
-  .navbar__panel {
-    display: block;
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    left: 0;
-    right: 0;
-    z-index: 2;
-    border: 1px solid var(--color-glass-border);
-    border-radius: 1.25rem;
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.2),
-      0 8px 32px rgba(80, 60, 140, 0.2);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition:
-      opacity var(--nav-motion),
-      visibility 0s linear var(--nav-motion);
-  }
-
-  .navbar__panel--open {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transition:
-      opacity var(--nav-motion),
-      visibility 0s linear 0s;
+    padding: 0.125rem 0.375rem 0.25rem;
   }
 
   .navbar__link {

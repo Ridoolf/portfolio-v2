@@ -31,6 +31,20 @@
   position: relative;
 }
 
+.projects .timeline__item--paired {
+  margin-top: -1.25rem;
+}
+
+.projects .timeline__item[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+@media (max-width: 768px) {
+  .projects .timeline__item--paired {
+    margin-top: -0.5rem;
+  }
+}
+
 .timeline__body {
   display: grid;
   grid-template-columns: 1fr 1fr;
