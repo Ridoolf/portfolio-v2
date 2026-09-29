@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useId, useState } from 'react'
-import { featuredProjects, otherProjects } from '../../data/projects'
+import { useLocale } from '../../i18n/LocaleContext'
 import { Timeline } from '../Timeline/Timeline'
 import { TimelineItem } from '../Timeline/TimelineItem'
 import './Projects.css'
@@ -27,7 +27,7 @@ function useIsMobile(onBreakpointChange) {
   return isMobile
 }
 
-function ProjectImage({ image, initials, title }) {
+function ProjectImage({ image, initials, title, altText }) {
   const [hasError, setHasError] = useState(false)
 
   if (hasError) {
@@ -42,19 +42,31 @@ function ProjectImage({ image, initials, title }) {
     <img
       className="projects__image"
       src={image}
-      alt={`Captura de ${title}`}
+      alt={altText}
       loading="lazy"
       onError={() => setHasError(true)}
     />
   )
 }
 
-function ProjectVideo({ video, image, initials, title }) {
+function ProjectVideo({
+  video,
+  image,
+  initials,
+  title,
+  videoAria,
+  screenshotAlt,
+}) {
   const [hasError, setHasError] = useState(false)
 
   if (hasError) {
     return (
-      <ProjectImage image={image} initials={initials} title={title} />
+      <ProjectImage
+        image={image}
+        initials={initials}
+        title={title}
+        altText={screenshotAlt}
+      />
     )
   }
 
@@ -66,13 +78,13 @@ function ProjectVideo({ video, image, initials, title }) {
       controls
       playsInline
       preload="metadata"
-      aria-label={`Recorrido en video de ${title}`}
+      aria-label={videoAria}
       onError={() => setHasError(true)}
     />
   )
 }
 
-function ProjectMedia({ project }) {
+function ProjectMedia({ project, copy }) {
   if (project.video) {
     return (
       <ProjectVideo
@@ -80,6 +92,8 @@ function ProjectMedia({ project }) {
         image={project.image}
         initials={project.initials}
         title={project.title}
+        videoAria={copy.videoAria(project.title)}
+        screenshotAlt={copy.screenshotAlt(project.title)}
       />
     )
   }
@@ -89,11 +103,12 @@ function ProjectMedia({ project }) {
       image={project.image}
       initials={project.initials}
       title={project.title}
+      altText={copy.screenshotAlt(project.title)}
     />
   )
 }
 
-function ProjectCard({ project, isMobile, isExpanded, onToggle }) {
+function ProjectCard({ project, isMobile, isExpanded, onToggle, copy }) {
   const panelId = useId()
   const isOpen = !isMobile || isExpanded
   const isCollapsed = isMobile && !isOpen
@@ -101,8 +116,8 @@ function ProjectCard({ project, isMobile, isExpanded, onToggle }) {
   const hasLinks = project.links?.demo || project.links?.repo
 
   const toggleLabel = isOpen
-    ? `Contraer ${project.title}`
-    : `Expandir ${project.title}`
+    ? copy.collapse(project.title)
+    : copy.expand(project.title)
 
   return (
     <article className={`projects__card${isOpen ? ' projects__card--open' : ''}`}>
@@ -154,7 +169,7 @@ function ProjectCard({ project, isMobile, isExpanded, onToggle }) {
 
           <p className="projects__description">{project.description}</p>
 
-          <ul className="projects__stack" aria-label="Tecnologías utilizadas">
+          <ul className="projects__stack" aria-label={copy.stackAria}>
             {project.stack.map((tech) => (
               <li key={tech} className="projects__tag">
                 {tech}
@@ -163,7 +178,7 @@ function ProjectCard({ project, isMobile, isExpanded, onToggle }) {
           </ul>
 
           {project.privateProject && (
-            <p className="projects__private-note">Sistema privado del cliente</p>
+            <p className="projects__private-note">{copy.privateNote}</p>
           )}
 
           {hasLinks && (
@@ -174,9 +189,9 @@ function ProjectCard({ project, isMobile, isExpanded, onToggle }) {
                   href={project.links.demo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Ver demo de ${project.title} (se abre en nueva pestaña)`}
+                  aria-label={copy.demoAria(project.title)}
                 >
-                  Ver demo
+                  {copy.demo}
                 </a>
               )}
               {project.links.repo && (
@@ -185,9 +200,9 @@ function ProjectCard({ project, isMobile, isExpanded, onToggle }) {
                   href={project.links.repo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Ver código de ${project.title} en GitHub (se abre en nueva pestaña)`}
+                  aria-label={copy.codeAria(project.title)}
                 >
-                  Código
+                  {copy.code}
                 </a>
               )}
             </div>
@@ -204,6 +219,7 @@ function ProjectTimeline({
   isMobile,
   expandedId,
   onToggle,
+  copy,
 }) {
   return projectList.map((project, index) => {
     const previousProject = projectList[index - 1]
@@ -217,13 +233,14 @@ function ProjectTimeline({
         id={`proyecto-${project.id}`}
         index={startIndex + index}
         paired={isPaired}
-        media={<ProjectMedia project={project} />}
+        media={<ProjectMedia project={project} copy={copy} />}
       >
         <ProjectCard
           project={project}
           isMobile={isMobile}
           isExpanded={expandedId === project.id}
           onToggle={onToggle}
+          copy={copy}
         />
       </TimelineItem>
     )
@@ -231,6 +248,8 @@ function ProjectTimeline({
 }
 
 export function Projects() {
+  const { ui, featuredProjects, otherProjects } = useLocale()
+  const copy = ui.projects
   const [expandedId, setExpandedId] = useState(null)
   const [showAll, setShowAll] = useState(false)
   const resetExpanded = useCallback(() => setExpandedId(null), [])
@@ -251,7 +270,7 @@ export function Projects() {
   return (
     <section id="proyectos" className="projects section-shell">
       <div className="projects__container">
-        <h2 className="section-title">Proyectos</h2>
+        <h2 className="section-title">{copy.title}</h2>
 
         <Timeline>
           <ProjectTimeline
@@ -260,6 +279,7 @@ export function Projects() {
             isMobile={isMobile}
             expandedId={expandedId}
             onToggle={handleToggle}
+            copy={copy}
           />
         </Timeline>
 
@@ -272,9 +292,7 @@ export function Projects() {
               aria-controls="projects-more"
               onClick={handleShowAllToggle}
             >
-              {showAll
-                ? 'Ver menos'
-                : `Ver todos los proyectos (${otherProjects.length})`}
+              {showAll ? copy.showLess : copy.showAll(otherProjects.length)}
             </button>
 
             <div
@@ -290,6 +308,7 @@ export function Projects() {
                     isMobile={isMobile}
                     expandedId={expandedId}
                     onToggle={handleToggle}
+                    copy={copy}
                   />
                 </Timeline>
               </div>

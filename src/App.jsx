@@ -6,12 +6,15 @@ import { Experience } from './components/Experience/Experience'
 import { Skills } from './components/Skills/Skills'
 import { Contact } from './components/Contact/Contact'
 import { Footer } from './components/Footer/Footer'
+import { useLocale } from './i18n/LocaleContext'
 
 function App() {
+  const { ui } = useLocale()
+
   return (
     <>
       <a className="skip-link" href="#inicio">
-        Ir al contenido principal
+        {ui.skipLink}
       </a>
       <Navbar />
       <main>

@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { tuEspacioOnlineShowcase } from '../../data/tuEspacioOnline'
+import { useLocale } from '../../i18n/LocaleContext'
 import './TuEspacioOnline.css'
 
-function ShowcaseImage({ image, initials, title }) {
+function ShowcaseImage({ image, initials, title, altText }) {
   const [hasError, setHasError] = useState(false)
 
   if (hasError) {
@@ -17,7 +17,7 @@ function ShowcaseImage({ image, initials, title }) {
     <img
       className="teo__image"
       src={image}
-      alt={`Captura del hero de ${title}`}
+      alt={altText}
       loading="lazy"
       onError={() => setHasError(true)}
     />
@@ -25,8 +25,10 @@ function ShowcaseImage({ image, initials, title }) {
 }
 
 export function TuEspacioOnline() {
+  const { ui, tuEspacioOnline } = useLocale()
+  const copy = ui.teo
   const { title, eyebrow, year, description, stack, image, initials, links } =
-    tuEspacioOnlineShowcase
+    tuEspacioOnline
 
   return (
     <section id="tu-espacio-online" className="teo section-shell">
@@ -41,13 +43,18 @@ export function TuEspacioOnline() {
 
         <article className="teo__spotlight glass-surface--strong">
           <div className="teo__media">
-            <ShowcaseImage image={image} initials={initials} title={title} />
+            <ShowcaseImage
+              image={image}
+              initials={initials}
+              title={title}
+              altText={copy.heroAlt(title)}
+            />
           </div>
 
           <div className="teo__body">
             <p className="teo__description">{description}</p>
 
-            <ul className="teo__stack" aria-label="Tecnologías utilizadas">
+            <ul className="teo__stack" aria-label={copy.stackAria}>
               {stack.map((tech) => (
                 <li key={tech} className="teo__tag">
                   {tech}
@@ -61,9 +68,9 @@ export function TuEspacioOnline() {
                 href={links.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Ver sitio de ${title} (se abre en nueva pestaña)`}
+                aria-label={copy.ctaAria(title)}
               >
-                Ver sitio
+                {copy.cta}
               </a>
             )}
           </div>

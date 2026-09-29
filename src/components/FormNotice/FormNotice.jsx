@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import './FormNotice.css'
 
-export function FormNotice({ type, message, onClose }) {
+export function FormNotice({ type, message, onClose, closeLabel }) {
   useEffect(() => {
     const timer = window.setTimeout(onClose, 6000)
     return () => window.clearTimeout(timer)
@@ -20,7 +20,7 @@ export function FormNotice({ type, message, onClose }) {
       <button
         type="button"
         className="form-notice__close"
-        aria-label="Cerrar aviso"
+        aria-label={closeLabel}
         onClick={onClose}
       >
         ×

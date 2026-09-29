@@ -1,13 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
+import { useLocale } from '../../i18n/LocaleContext'
 import './Navbar.css'
-
-const NAV_LINKS = [
-  { label: 'Inicio', href: '#inicio' },
-  { label: 'Proyectos', href: '#proyectos' },
-  { label: 'Experiencia', href: '#experiencia' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Contacto', href: '#contacto' },
-]
 
 const MOBILE_BREAKPOINT = '(max-width: 900px)'
 
@@ -20,12 +13,50 @@ function getResolvedLength(variable) {
   return value
 }
 
+function LangSwitch({ className = '' }) {
+  const { locale, setLocale, ui } = useLocale()
+
+  return (
+    <div
+      className={`navbar__lang ${className}`.trim()}
+      role="group"
+      aria-label={ui.nav.langSwitch}
+    >
+      <button
+        type="button"
+        className={`navbar__lang-btn${locale === 'es' ? ' navbar__lang-btn--active' : ''}`}
+        onClick={() => setLocale('es')}
+        aria-pressed={locale === 'es'}
+      >
+        ES
+      </button>
+      <button
+        type="button"
+        className={`navbar__lang-btn${locale === 'en' ? ' navbar__lang-btn--active' : ''}`}
+        onClick={() => setLocale('en')}
+        aria-pressed={locale === 'en'}
+      >
+        EN
+      </button>
+    </div>
+  )
+}
+
 export function Navbar() {
+  const { ui } = useLocale()
   const headerRef = useRef(null)
   const metricsRef = useRef({ initial: 0, docked: 0 })
   const isDockedRef = useRef(false)
   const [isDocked, setIsDocked] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const navLinks = [
+    { label: ui.nav.home, href: '#inicio' },
+    { label: ui.nav.projects, href: '#proyectos' },
+    { label: ui.nav.experience, href: '#experiencia' },
+    { label: ui.nav.skills, href: '#skills' },
+    { label: ui.nav.contact, href: '#contacto' },
+  ]
 
   useEffect(() => {
     const header = headerRef.current
@@ -119,7 +150,7 @@ export function Navbar() {
       <button
         type="button"
         className={`navbar__backdrop ${isMenuOpen ? 'navbar__backdrop--visible' : ''}`}
-        aria-label="Cerrar menú"
+        aria-label={ui.nav.closeMenuBackdrop}
         aria-hidden={!isMenuOpen}
         tabIndex={isMenuOpen ? 0 : -1}
         onClick={closeMenu}
@@ -128,7 +159,7 @@ export function Navbar() {
       <div className="navbar__shell">
         <nav
           className="navbar__bubble glass-surface"
-          aria-label="Navegación principal"
+          aria-label={ui.nav.aria}
         >
           <div className="navbar__bar">
             <a className="navbar__brand" href="#inicio" onClick={closeMenu}>
@@ -140,11 +171,13 @@ export function Navbar() {
               className="navbar__toggle"
               aria-expanded={isMenuOpen}
               aria-controls="navbar-menu-mobile"
-              aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+              aria-label={isMenuOpen ? ui.nav.closeMenu : ui.nav.openMenu}
               onClick={() => setIsMenuOpen((prev) => !prev)}
             >
               <span className="navbar__toggle-icon" aria-hidden="true" />
             </button>
+
+            <LangSwitch className="navbar__lang--mobile" />
           </div>
 
           <div
@@ -155,7 +188,7 @@ export function Navbar() {
           >
             <div className="navbar__menu-inner">
               <ul className="navbar__list navbar__list--mobile">
-                {NAV_LINKS.map(({ label, href }) => (
+                {navLinks.map(({ label, href }) => (
                   <li key={href}>
                     <a className="navbar__link" href={href} onClick={closeMenu}>
                       {label}
@@ -167,7 +200,7 @@ export function Navbar() {
           </div>
 
           <ul id="navbar-menu" className="navbar__list navbar__list--desktop">
-            {NAV_LINKS.map(({ label, href }) => (
+            {navLinks.map(({ label, href }) => (
               <li key={href}>
                 <a className="navbar__link" href={href} onClick={closeMenu}>
                   {label}
@@ -175,6 +208,8 @@ export function Navbar() {
               </li>
             ))}
           </ul>
+
+          <LangSwitch className="navbar__lang--desktop" />
         </nav>
       </div>
     </header>

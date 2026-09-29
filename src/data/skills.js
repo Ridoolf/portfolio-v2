@@ -1,38 +1,28 @@
 export const skills = [
   {
-    id: 'html',
-    name: 'HTML',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
-  },
-  {
-    id: 'css',
-    name: 'CSS',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg',
-  },
-  {
-    id: 'javascript',
-    name: 'JS',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg',
-  },
-  {
     id: 'react',
     name: 'React',
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg',
   },
   {
+    id: 'nextjs',
+    name: 'Next.js',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg',
+  },
+  {
+    id: 'nodejs',
+    name: 'Node.js',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg',
+  },
+  {
+    id: 'mongodb',
+    name: 'MongoDB',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg',
+  },
+  {
     id: 'python',
     name: 'Python',
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg',
-  },
-  {
-    id: 'django',
-    name: 'Django',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg',
-  },
-  {
-    id: 'postgresql',
-    name: 'PostgreSQL',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg',
   },
   {
     id: 'git',

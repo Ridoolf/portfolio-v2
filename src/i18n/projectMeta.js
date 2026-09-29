@@ -1,0 +1,92 @@
+/** Campos no traducibles por proyecto (orden del timeline). */
+export const PROJECT_META = [
+  {
+    id: 'ron',
+    featured: true,
+    year: '2026',
+    stack: ['React', 'Next.js', 'Tailwind CSS'],
+    image: '/projects/ron.jpg',
+    initials: 'RO',
+  },
+  {
+    id: 'fannyruth',
+    featured: true,
+    year: '2026',
+    stack: ['React', 'Vite', 'React Router', 'GSAP'],
+    links: {
+      demo: 'https://fannyruth.vercel.app/',
+      repo: 'https://github.com/Ridoolf/fannyruth',
+    },
+    image: '/projects/fannyruth.jpg',
+    initials: 'FR',
+  },
+  {
+    id: 'fr-consultorio',
+    featured: true,
+    year: '2026',
+    stack: ['React', 'Django', 'DRF', 'PostgreSQL', 'Axios', 'Vercel', 'Render'],
+    image: '/projects/fr-consultorio.png',
+    initials: 'FC',
+    privateProject: true,
+  },
+  {
+    id: 'fumigaciones-paz',
+    featured: true,
+    year: '2026',
+    stack: ['HTML', 'CSS', 'JavaScript'],
+    links: {
+      demo: 'https://www.controltotalfumigacionespaz.com.ar/',
+      repo: 'https://github.com/Ridoolf/controltotal',
+    },
+    image: '/projects/fumigaciones-paz.png',
+    initials: 'FP',
+  },
+  {
+    id: 'med-mistica',
+    featured: false,
+    year: '2026',
+    stack: ['HTML', 'CSS', 'JavaScript'],
+    links: {
+      demo: 'https://medmistica.com.ar/',
+      repo: 'https://github.com/Ridoolf/MED-Mistica',
+    },
+    image: '/projects/med-mistica.png',
+    initials: 'MM',
+  },
+  {
+    id: 'aberturasluxor',
+    featured: false,
+    year: '2025',
+    stack: ['HTML', 'CSS'],
+    links: {
+      demo: 'https://www.aberturasluxor.com.ar/',
+      repo: 'https://github.com/Ridoolf/aberturasluxor',
+    },
+    image: '/projects/aberturasluxor.png',
+    initials: 'AL',
+  },
+  {
+    id: 'live-chat',
+    featured: false,
+    year: '2025',
+    stack: ['React', 'Firebase', 'CSS'],
+    links: {
+      demo: 'https://live-chat-mu.vercel.app',
+      repo: 'https://github.com/Ridoolf/live-chat',
+    },
+    image: '/projects/live-chat.png',
+    initials: 'LC',
+  },
+  {
+    id: 'portfolio-v1',
+    featured: false,
+    year: '2025',
+    stack: ['React', 'MUI', 'JavaScript'],
+    links: {
+      demo: 'https://portfolio-blond-six-7eclj568d2.vercel.app/',
+      repo: 'https://github.com/Ridoolf/Portfolio',
+    },
+    image: '/projects/portfolio-v1.png',
+    initials: 'P1',
+  },
+]

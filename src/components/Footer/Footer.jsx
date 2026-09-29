@@ -1,5 +1,6 @@
 import './Footer.css'
 import { siteLinks } from '../../config/siteLinks'
+import { useLocale } from '../../i18n/LocaleContext'
 
 const SOCIAL_LINKS = [
   {
@@ -13,18 +14,18 @@ const SOCIAL_LINKS = [
 ]
 
 export function Footer() {
+  const { ui } = useLocale()
+  const copy = ui.footer
   const year = new Date().getFullYear()
 
   return (
     <footer className="footer">
       <div className="footer__container">
         <div className="footer__start">
-          <p className="footer__copy">
-            © {year} Lucas Ridolfi. Todos los derechos reservados.
-          </p>
+          <p className="footer__copy">{copy.rights(year)}</p>
 
           <p className="footer__service">
-            Creador de{' '}
+            {copy.creator}{' '}
             <a
               className="footer__service-link"
               href={siteLinks.tuEspacioOnline.url}
@@ -36,7 +37,7 @@ export function Footer() {
           </p>
         </div>
 
-        <nav aria-label="Redes sociales">
+        <nav aria-label={copy.socialAria}>
           <ul className="footer__list">
             {SOCIAL_LINKS.map(({ label, href }) => (
               <li key={href}>

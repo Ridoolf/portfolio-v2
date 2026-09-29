@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useLocale } from '../../i18n/LocaleContext'
 import './Hero.css'
 
 const CV_PATH = '/cv/lucas-ridolfi-cv.pdf'
@@ -32,7 +33,7 @@ function DownloadIcon() {
   )
 }
 
-function HeroProfileImage() {
+function HeroProfileImage({ alt }) {
   const [hasError, setHasError] = useState(false)
 
   if (hasError) {
@@ -47,7 +48,7 @@ function HeroProfileImage() {
     <img
       className="hero__image"
       src={PROFILE_IMAGE}
-      alt="Lucas Ridolfi, Full Stack Developer"
+      alt={alt}
       width={280}
       height={280}
       onError={() => setHasError(true)}
@@ -56,44 +57,54 @@ function HeroProfileImage() {
 }
 
 export function Hero() {
+  const { ui } = useLocale()
+  const { hero } = ui
+
   return (
     <section id="inicio" className="hero">
       <div className="hero__container">
         <div className="hero__content">
           <div className="hero__heading">
-            <p className="hero__greeting">Hola, soy</p>
-            <h1 className="hero__name">Lucas Ridolfi</h1>
-            <p className="hero__role">Full Stack Developer</p>
+            <p className="hero__greeting">{hero.greeting}</p>
+            <h1 className="hero__name">{hero.name}</h1>
+            <p className="hero__role">{hero.role}</p>
+            <p className="hero__tagline">{hero.tagline}</p>
           </div>
-          <p className="hero__description">
-            Especializado en <span className="hero__description-highlight">ReactJS</span>, desarrollo páginas web enfocadas en la experiencia del usuario. <br />
-            Actualmente estudio Python en "BA Tech" y sigo formándome mientras trabajo en proyectos freelance.
-          </p>
+          <div className="hero__description">
+            <p>
+              {hero.descriptionLead}{' '}
+              <span className="hero__description-highlight">
+                {hero.descriptionStack}
+              </span>
+              {hero.descriptionRest}
+            </p>
+            <p>{hero.descriptionSecond}</p>
+          </div>
 
           <div className="hero__actions">
             <a className="hero__btn hero__btn--primary" href="#proyectos">
-              Ver proyectos
+              {hero.ctaProjects}
             </a>
             <a
               className="hero__btn hero__btn--secondary glass-surface--soft"
               href="#contacto"
             >
-              Contáctame
+              {hero.ctaContact}
             </a>
             <a
               className="hero__btn hero__btn--tertiary"
               href={CV_PATH}
               download={CV_FILENAME}
-              aria-label="Descargar curriculum vitae en PDF"
+              aria-label={hero.ctaCvAria}
             >
               <DownloadIcon />
-              Descargar CV
+              {hero.ctaCv}
             </a>
           </div>
         </div>
 
         <div className="hero__image-wrapper">
-          <HeroProfileImage />
+          <HeroProfileImage alt={hero.profileAlt} />
         </div>
       </div>
     </section>

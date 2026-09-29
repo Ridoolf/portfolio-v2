@@ -5,6 +5,7 @@ import {
   EMAILJS_CONFIG,
   isEmailJsConfigured,
 } from '../../config/emailjs'
+import { useLocale } from '../../i18n/LocaleContext'
 import { FormNotice } from '../FormNotice/FormNotice'
 import './Contact.css'
 
@@ -15,6 +16,8 @@ const INITIAL_FORM = {
 }
 
 export function Contact() {
+  const { ui } = useLocale()
+  const copy = ui.contact
   const [form, setForm] = useState(INITIAL_FORM)
   const [isSending, setIsSending] = useState(false)
   const [notice, setNotice] = useState(null)
@@ -32,8 +35,7 @@ export function Contact() {
     if (!isEmailJsConfigured()) {
       setNotice({
         type: 'error',
-        message:
-          'El formulario aún no está configurado. Agregá las variables de EmailJS en tu archivo .env.',
+        message: copy.errorNotConfigured,
       })
       return
     }
@@ -57,13 +59,12 @@ export function Contact() {
       setForm(INITIAL_FORM)
       setNotice({
         type: 'success',
-        message: '¡Mensaje enviado! Te voy a responder a la brevedad.',
+        message: copy.success,
       })
     } catch {
       setNotice({
         type: 'error',
-        message:
-          'No se pudo enviar el mensaje. Probá de nuevo en unos minutos.',
+        message: copy.errorSend,
       })
     } finally {
       setIsSending(false)
@@ -73,20 +74,17 @@ export function Contact() {
   return (
     <section id="contacto" className="contact section-shell">
       <div className="contact__container">
-        <h2 className="section-title">Contacto</h2>
+        <h2 className="section-title">{copy.title}</h2>
 
         <div className="contact__layout">
           <div className="contact__intro">
-            <p className="contact__text">
-              ¿Tenés un proyecto en mente o querés charlar sobre una idea?
-              Completá el formulario y te respondo a la brevedad.
-            </p>
+            <p className="contact__text">{copy.intro}</p>
           </div>
 
           <form className="contact__form" onSubmit={handleSubmit} noValidate>
             <div className="contact__field">
               <label className="contact__label" htmlFor="contact-name">
-                Nombre
+                {copy.name}
               </label>
               <input
                 id="contact-name"
@@ -95,7 +93,7 @@ export function Contact() {
                 name="name"
                 value={form.name}
                 onChange={handleChange}
-                placeholder="Tu nombre"
+                placeholder={copy.namePlaceholder}
                 required
                 autoComplete="name"
                 disabled={isSending}
@@ -104,7 +102,7 @@ export function Contact() {
 
             <div className="contact__field">
               <label className="contact__label" htmlFor="contact-email">
-                Email
+                {copy.email}
               </label>
               <input
                 id="contact-email"
@@ -113,7 +111,7 @@ export function Contact() {
                 name="email"
                 value={form.email}
                 onChange={handleChange}
-                placeholder="tu@email.com"
+                placeholder={copy.emailPlaceholder}
                 required
                 autoComplete="email"
                 disabled={isSending}
@@ -122,7 +120,7 @@ export function Contact() {
 
             <div className="contact__field">
               <label className="contact__label" htmlFor="contact-message">
-                Mensaje
+                {copy.message}
               </label>
               <textarea
                 id="contact-message"
@@ -130,7 +128,7 @@ export function Contact() {
                 name="message"
                 value={form.message}
                 onChange={handleChange}
-                placeholder="Contame en qué puedo ayudarte..."
+                placeholder={copy.messagePlaceholder}
                 rows={5}
                 required
                 disabled={isSending}
@@ -142,7 +140,7 @@ export function Contact() {
               type="submit"
               disabled={isSending}
             >
-              {isSending ? 'Enviando...' : 'Enviar mensaje'}
+              {isSending ? copy.submitting : copy.submit}
             </button>
           </form>
         </div>
@@ -153,6 +151,7 @@ export function Contact() {
           type={notice.type}
           message={notice.message}
           onClose={closeNotice}
+          closeLabel={ui.contact.closeNotice}
         />
       )}
     </section>
