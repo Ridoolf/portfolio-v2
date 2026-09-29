@@ -177,7 +177,7 @@ export function Navbar() {
               <span className="navbar__toggle-icon" aria-hidden="true" />
             </button>
 
-            <LangSwitch className="navbar__lang--mobile" />
+            <LangSwitch />
           </div>
 
           <div
@@ -208,8 +208,6 @@ export function Navbar() {
               </li>
             ))}
           </ul>
-
-          <LangSwitch className="navbar__lang--desktop" />
         </nav>
       </div>
     </header>

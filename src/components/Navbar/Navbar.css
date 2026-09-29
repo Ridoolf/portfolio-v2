@@ -83,6 +83,7 @@
 }
 
 .navbar__brand {
+  order: 1;
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -208,15 +209,12 @@
   outline-offset: 2px;
 }
 
-.navbar__lang--mobile {
-  display: none;
-}
-
-.navbar__lang--desktop {
-  display: inline-flex;
+.navbar__list--desktop {
+  order: 2;
 }
 
 .navbar__lang {
+  order: 3;
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
@@ -309,12 +307,10 @@
     display: flex;
   }
 
-  .navbar__lang--desktop {
-    display: none;
-  }
-
-  .navbar__lang--mobile {
-    display: inline-flex;
+  .navbar__brand,
+  .navbar__list--desktop,
+  .navbar__lang {
+    order: unset;
   }
 
   .navbar__bar .navbar__toggle {
