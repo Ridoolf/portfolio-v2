@@ -63,15 +63,13 @@
 
 @media (max-width: 768px) {
   .timeline {
-    --timeline-axis: 0.4375rem;
-    --timeline-gutter: 1.75rem;
+    --timeline-gutter: 0;
 
     gap: 1.75rem;
   }
 
   .timeline::before {
-    top: 0.5rem;
-    bottom: 0.5rem;
+    content: none;
   }
 
   .timeline__body {
